@@ -34,7 +34,7 @@ Let's create our first stream called users and add new event to it.
     If you are Event Sourcing a domain model a stream would equate to an aggregate."
     -- Event Store Documentation
 	
-Sample event is described in a file sample_event.txt and looks like this:
+Sample event is are available in a files john_event.txt and jane_event.txt. They look like this:
 
 ```
 [
@@ -43,16 +43,17 @@ Sample event is described in a file sample_event.txt and looks like this:
     "eventType": "UserInitialized",
     "data": {
       "firstName": "John",
-      "lastName" : "Terry"
+      "lastName" : "Smith"
     }
   }
 ]
 ```
 
-Now lets add him to our users stream
+Now lets add John & Jane event to our store.
+E.g to add John we call 
 
 ```
-$ curl -i -d @sample_event.txt "http://172.17.0.3:2113/streams/users" -H "Content-Type:application/vnd.eventstore.events+json"
+$ curl -i -d @john_event.txt "http://172.17.0.3:2113/streams/users" -H "Content-Type:application/vnd.eventstore.events+json"
 HTTP/1.1 201 Created
 Access-Control-Allow-Methods: POST, DELETE, GET, OPTIONS
 Access-Control-Allow-Headers: Content-Type, X-Requested-With, X-PINGOTHER, Authorization, ES-LongPoll, ES-ExpectedVersion, ES-EventId, ES-EventType, ES-RequiresMaster, ES-HardDelete, ES-ResolveLinkTo, ES-ExpectedVersion
@@ -66,7 +67,7 @@ Content-Length: 0
 Keep-Alive: timeout=15,max=100
 ```
 
-Navigate your browser to ```http://172.17.0.3:2113/web/index.html#/streams``` to see the results. In 'Recently Changed Streams' you will notice new stream called 'users'. If you click it, you will be able to browse all the events in it. Currently we have one event in it, the one that we've just added.
+Navigate your browser to ```http://172.17.0.3:2113/web/index.html#/streams``` to see the results. In 'Recently Changed Streams' you will notice new stream called 'users'. If you click it, you will be able to browse all the events in it. Currently we have two events in it, the ones that we've just added.
 
 ## Reading from stream
 
@@ -82,7 +83,7 @@ Access-Control-Expose-Headers: Location, ES-Position
 Cache-Control: max-age=0, no-cache, must-revalidate
 Vary: Accept
 ETag: "0;-1296467268"
-Content-Type: application/atom+xml; charset=utf-8
+Content-Type: application/atom+xml; charset=utf-8 
 Server: Mono-HTTPAPI/1.0
 Date: Wed, 17 Jun 2015 21:43:06 GMT
 Content-Length: 892
@@ -102,7 +103,9 @@ Keep-Alive: timeout=15,max=100
 </feed>
 ```
 
-We see as expected that there is one event, accesible under http://172.17.0.3:2113/streams/users/0. Let's try to fetch it
+Atom feed (you know, the one you use for blogs ;) ) will only give you stream of links to events. This is fully browsable, since you can you provided links like 'first' or 'previous'.
+
+To fetch event details we must create separate call, using link listed in the feed. Let's try that now:
 
 ```
 $ curl -i http://127.0.0.1:2113/streams/users/0 -H "Accept: application/json"

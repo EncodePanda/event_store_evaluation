@@ -1,0 +1,10 @@
+[
+  {
+    "eventId": "cbfffff1-b413-4dfe-a01f-fff0c34e16e4",
+    "eventType": "UserInitialized",
+    "data": {
+      "firstName": "JohnJane",
+      "lastName" : "Smith"
+    }
+  }
+]
