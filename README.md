@@ -26,7 +26,7 @@ $ sudo docker inspect 5520 | grep IPAddress
 
 Now we can open admin console with URL ```http://172.17.0.3:2113```. User is admin, password is changeit.
 
-### Inserting first event
+## Inserting first two events
 
 Let's create our first stream called users and add new event to it.
 
@@ -124,6 +124,7 @@ Keep-Alive: timeout=15,max=100
 
 {
   "firstName": "John",
-  "lastName": "Terry"
+  "lastName": "Smith
 }
 ```
+
