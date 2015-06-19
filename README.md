@@ -39,22 +39,18 @@ Let's create our first stream called users and add new event to it.
 > If you are Event Sourcing a domain model a stream would equate to an aggregate."
 > -- Event Store Documentation
 	
-Sample event is are available in a files [john_event.txt](john_event.txt) and [john_event.txt](john_event.txt). Now lets add John & Jane events to our store. We will create stream per each user, as Event Storm can hundreds of millions of streams.
-Let's imagine that John has an ID = 1 and Jane has an ID = 2. Thus we will create to streams: user_1 and user_2.
+Sample event is are available in a files [john_event.txt](john_event.txt) and [jane_event.txt](jane_event.txt). Now lets add John & Jane events to our store. Since Event Store can handle hundred of millions of streams, we will create stream per each user: user_1 for John and user_2 for Jane.
 
 ```
 $ curl -i -d @john_event.txt "http://172.17.0.3:2113/streams/user_1" -H "Content-Type:application/vnd.eventstore.events+json"
 HTTP/1.1 201 Created
-Access-Control-Allow-Methods: POST, DELETE, GET, OPTIONS
-Access-Control-Allow-Headers: Content-Type, X-Requested-With, X-PINGOTHER, Authorization, ES-LongPoll, ES-ExpectedVersion, ES-EventId, ES-EventType, ES-RequiresMaster, ES-HardDelete, ES-ResolveLinkTo, ES-ExpectedVersion
-Access-Control-Allow-Origin: *
-Access-Control-Expose-Headers: Location, ES-Position
-Location: http://172.17.0.3:2113/streams/user_1/0
-Content-Type: text/plain; charset=utf-8
-Server: Mono-HTTPAPI/1.0
-Date: Thu, 18 Jun 2015 15:20:24 GMT
-Content-Length: 0
-Keep-Alive: timeout=15,max=100
+(...)
+```
+
+```
+$ curl -i -d @jane_event.txt "http://172.17.0.3:2113/streams/user_2" -H "Content-Type:application/vnd.eventstore.events+json"
+HTTP/1.1 201 Created
+(...)
 ```
 
 Navigate your browser to http://172.17.0.3:2113/web/index.html#/streams to see the results. In 'Recently Changed Streams' you will notice two new stream created called "user_1" and "user_2". If you click it, you will be able to browse all the events in it. Currently we have one event per each stream.
