@@ -1,0 +1,5 @@
+package ese
+
+class WriteEventExample {
+
+}
