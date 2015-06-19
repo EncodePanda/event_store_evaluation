@@ -96,12 +96,12 @@ Keep-Alive: timeout=15,max=100
 </feed>
 ```
 
-Atom feed (you know, the one you use for blogs ;) ) will only give you stream of links to events. This is fully browsable, since you can you provided links like 'first' or 'previous'.
+Atom feed will only give you stream of links to events. This is fully browsable, since you can you provided links like 'first' or 'previous'.
 
 To fetch event details we must create separate call, using link listed in the feed. Let's try that now:
 
 ```
-$ curl -i http://127.0.0.1:2113/streams/users/0 -H "Accept: application/json"
+$ curl -i http://127.0.0.1:2113/streams/users_1/0 -H "Accept: application/json"
 HTTP/1.1 200 OK
 Access-Control-Allow-Methods: GET, OPTIONS
 Access-Control-Allow-Headers: Content-Type, X-Requested-With, X-PINGOTHER, Authorization, ES-LongPoll, ES-ExpectedVersion, ES-EventId, ES-EventType, ES-RequiresMaster, ES-HardDelete, ES-ResolveLinkTo, ES-ExpectedVersion
@@ -117,7 +117,7 @@ Keep-Alive: timeout=15,max=100
 
 {
   "firstName": "John",
-  "lastName": "Smith
+  "lastName": "Smith"
 }
 ```
 
@@ -131,9 +131,7 @@ There are two ways to write events to stream:
 1. with Actors 
 2. with Future-like API
 
-
-
-
+Both ways are shown in [WriteEventExample.scala](/src/main/scala/ese/WriteEventExample.scala)
 
 ### Reading events programmatically
 
