@@ -140,5 +140,5 @@ As with writes, there are two ways to read events: with Actors and with Future-l
 
 1. *ReadEvent* - will fetch details of one particular event, examples in [ReadParticularStreamEvent.scala](/src/main/scala/ese/ReadParticularStreamEvent.scala)
 2. *ReadStreamEvents* - will fetach list of events from given stream, examples in  [ReadStreamEvents.scala](/src/main/scala/ese/ReadStreamEvents.scala)
-3. *ReadAllEvents* - will fetchh ALL events in the system, examples in[ReadAllEvents.scala](/src/main/scala/es/ReadAllEvents.scala)
+3. *ReadAllEvents* - will fetchh ALL events in the system, examples in [ReadAllEvents.scala](/src/main/scala/es/ReadAllEvents.scala)
 
