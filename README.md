@@ -136,9 +136,9 @@ Both ways are shown in [WriteEventExample.scala](/src/main/scala/ese/WriteEventE
 
 ### Reading events programmatically
 
-There are 3 types of commands that you can use to read events:
+As with writes, there are two ways to read events: with Actors and with Future-like API. There are 3 types of commands that you can use to read events:
 
-1. ReadEvent - will fetch details of one particular event. 
-2. ReadStreamEvents - will fetach list of events from given stream, examples in  [ReadStreamEvents.scala](/src/main/scala/ese/ReadStreamEvents.scala)
-3. ReadAllEvents - will fetchh ALL events in the system
+1. *ReadEvent* - will fetch details of one particular event, examples in[ReadParticularStreamEvent.scala](/src/main/scala/ese/ReadParticularStreamEvent.scala)
+2. *ReadStreamEvents* - will fetach list of events from given stream, examples in  [ReadStreamEvents.scala](/src/main/scala/ese/ReadStreamEvents.scala)
+3. *ReadAllEvents* - will fetchh ALL events in the system
 
