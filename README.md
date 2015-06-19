@@ -128,6 +128,7 @@ JVM API is hosted on github under https://github.com/EventStore/EventStore.JVM
 ### Writing events programmatically
 
 There are two ways to write events to stream:
+
 1. with Actors 
 2. with Future-like API
 
@@ -135,10 +136,9 @@ Both ways are shown in [WriteEventExample.scala](/src/main/scala/ese/WriteEventE
 
 ### Reading events programmatically
 
-There are 4 types of commands that you can you to read:
+There are 3 types of commands that you can use to read events:
 
-1. ReadEvent
-2. ReadStreamEvents
-3. ReadAllEvents
+1. ReadEvent - will fetch details of one particular event. 
+2. ReadStreamEvents - will fetach list of events from given stream, examples in  [ReadStreamEvents.scala](/src/main/scala/ese/ReadStreamEvents.scala)
+3. ReadAllEvents - will fetchh ALL events in the system
 
-*ReadEvent* will fetch details of one particular event of given stream. *ReadStreamEvents* will fetch list of events from given stream.  
