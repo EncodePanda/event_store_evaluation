@@ -1,7 +1,9 @@
 package ese
 
+import java.net.InetSocketAddress
+
 import akka.actor.Status.Failure
-import akka.actor.{ ActorLogging, Actor, Props, ActorSystem }
+import akka.actor.{ActorLogging, Actor, Props, ActorSystem}
 import eventstore.EventStream.Id
 import eventstore._
 import eventstore.tcp.ConnectionActor
@@ -11,6 +13,10 @@ import scala.concurrent.Future
 trait InitWrite {
 
   val system = ActorSystem()
+
+  val settings = Settings(
+    address = new InetSocketAddress("172.17.0.3", 1113),
+    defaultCredentials = Some(UserCredentials("admin", "changeit")))
 
   val stream: Id = EventStream.Id("user_2")
 
@@ -33,7 +39,7 @@ object WriteEventExampleActorWay extends App with InitWrite {
     }
   }
 
-  val connection = system.actorOf(ConnectionActor.props())
+  val connection = system.actorOf(ConnectionActor.props(settings))
   implicit val writeResult = system.actorOf(Props[WriteResult])
 
   connection ! WriteEvents(stream, List(event))
@@ -42,13 +48,15 @@ object WriteEventExampleActorWay extends App with InitWrite {
 
 object WriteEventExampleEsConnectionWay extends App with InitWrite {
 
-  val esConnection = EsConnection(system)
+  val esConnection = EsConnection(system, settings)
   val log = system.log
 
   import system.dispatcher
 
   val writeEvents: Future[WriteEventsCompleted] = esConnection.future(WriteEvents(stream, List(event)))
   writeEvents.onSuccess {
-    case x: WriteEventsCompleted => log.info(x.numbersRange.toString)
+    case x: WriteEventsCompleted =>
+      log.info(x.numbersRange.toString)
+      system.shutdown()
   }
 }
