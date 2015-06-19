@@ -132,6 +132,8 @@ There are two ways to write events to stream:
 1. with Actors 
 2. with Future-like API
 
+> "They are in fact the same api one just uses the other."
+
 Both ways are shown in [WriteEventExample.scala](/src/main/scala/ese/WriteEventExample.scala)
 
 ### Reading events programmatically
